@@ -8,36 +8,51 @@ struct {
         char country[30];
     }student;
 // enter the detail of the students
+
 void enter(void){
-    int no_of_student,i;
-    printf("Enter the no of student :");
-    scanf("%d",&no_of_student);
-    if(no_of_student == 0){
-            printf("\nPlease select more than 1 student to add\n\n\a");
-        }
-    
-    for(i = 1; i <= no_of_student; ++i)
-    {
-        printf("1.Enter the name of  %d the student: \n",i);
+       
+        printf("2.Enter the name of the student: \n");
         scanf("%s", student.name);
-        printf("2.Enter the city of %d the student\n",i);
+        printf("3.Enter the city of the student: \n");
         scanf("%s", student.city);
-        printf("2.Enter the state of %d the student\n",i);
+        printf("4.Enter the state of the student: \n");
         scanf("%s", student.state);
-        printf("2.Enter the country of %d the student\n",i);
+        printf("5.Enter the country of the student: \n");
         scanf("%s", student.country);
         
-    }
+    
     option();
 };
+
+
 void display(void){
     
-    printf("student name:- %s\n", student.name);
-    printf("student city:- %s\n", student.city);
-    printf("student state:- %s\n", student.state);
-    printf("student country:- %s\n", student.country);
+    FILE *fp;
+    fp = fopen("data.txt","a+");
+    
+    fprintf(fp,"%s\n",student.name);
+    fprintf(fp,"%s\n",student.city);
+    fprintf(fp,"%s\n", student.state);
+    fprintf(fp,"%s\n",student.country);
+    fclose(fp);
+    fp = fopen("data.txt","r");
+    while(fscanf(fp,"%s %s %s %s",student.name,student.city,student.state,student.country)!=EOF){
+        
+        printf("student.name: %s\n",student.name);
+        printf("city: %s\n",student.city);
+        printf("state: %s\n", student.state);
+        printf("country: %s\n\n",student.country);
+        
+    }
+    if(EOF){
+        printf("There is no data! please add some data\n");
+    }
+    fclose(fp);
+   
+    
     option();
 };
+
 
 //ask the user about task after enter function 
 void option(void){
@@ -53,6 +68,7 @@ void option(void){
         case 2:
         display();
         break;
+        
         case 3:
         exit (0);
         break;
@@ -68,7 +84,7 @@ void option(void){
 
 int main(void)
 {
-    
+   
     printf("1.enter\n2.display\n");
     int user;
     printf("Select one of the following option:\n");
