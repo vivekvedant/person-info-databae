@@ -57,7 +57,7 @@ void display(){
 
 
 //ask the user about task after enter function 
-void option(void){
+void option(){
     int choice;
     printf("------------------------------------\n");
     printf("1.add more\n2.display\n3.search\n4.delete\n5.exit");
@@ -123,7 +123,7 @@ void del(){
     option();
     
 }
-int main(void)
+int main()
 {
     option();
     return 0;    
